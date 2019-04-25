@@ -19,9 +19,17 @@ end)
 
 hotkey.bind({"control", "shift"}, "P", function()
   local win = window.focusedWindow()
-  local focusedScreen = screen.mainScreen()
-  local nextScreen = focusedScreen:next()
-  win:moveToScreen(nextScreen)
+
+  local myScreen = win:screen()
+  local primaryScreen = screen.primaryScreen()
+
+
+  if (myScreen:id() == primaryScreen:id()) then
+    win:moveToScreen(primaryScreen:next())
+  else
+    win:moveToScreen(primaryScreen)
+  end
+
 end)
 
 hotkey.bind({"control", "shift"}, "Left", function()
